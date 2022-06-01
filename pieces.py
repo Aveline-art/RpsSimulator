@@ -14,12 +14,6 @@ class Symbol(Enum):
     PAPER = "PA"
     SCISSORS = "SC"
 
-piece_image = {
-    'RO': pygame.image.load('assets/rock.png'),
-    'PA': pygame.image.load('assets/paper.png'),
-    'SC': pygame.image.load('assets/scissors.png'),
-}
-
 
 class Piece(pygame.sprite.Sprite):
     direction = {
@@ -35,22 +29,26 @@ class Piece(pygame.sprite.Sprite):
 
     def __init__(self, symbol: Symbol, center: Optional[Tuple[int, int]] = None) -> None:
         super().__init__() 
-        self._symbol = symbol
-        self.image = piece_image[symbol.value]
+        self.symbol = symbol
+        self.image = font.render(symbol.value, True, preset.color.BLACK)
         self.rect = self.image.get_rect()
         self.rect.center = center or (random.randint(0, preset.SCREEN_WIDTH), random.randint(0, preset.SCREEN_HEIGHT))
-    
-    @property
-    def symbol(self):
-        return self._symbol
-    
-    @symbol.setter
-    def symbol(self, new_symbol: str):
-        self._symbol = new_symbol
-    
-    def update_image(self):
-        self.image = font.render(self.symbol.value, True, preset.color.BLACK)
 
     def move(self):
         val = random.randint(1, 8)
         self.rect.move_ip(self.direction[val])
+
+class Rock_Piece(Piece):
+    def __init__(self, center: Optional[Tuple[int, int]] = None) -> None:
+        super().__init__(Symbol.ROCK, center)
+        self.image = pygame.image.load('assets/rock.png')
+
+class Paper_Piece(Piece):
+    def __init__(self, center: Optional[Tuple[int, int]] = None) -> None:
+        super().__init__(Symbol.PAPER, center)
+        self.image = pygame.image.load('assets/paper.png')
+
+class Scissors_Piece(Piece):
+    def __init__(self, center: Optional[Tuple[int, int]] = None) -> None:
+        super().__init__(Symbol.SCISSORS, center)
+        self.image = pygame.image.load('assets/scissors.png')

@@ -1,8 +1,8 @@
 #Imports
 import pygame, sys
 from pygame.locals import *
-from pieces import Piece, Symbol
 import preset
+from rps import RPS
 
 #Initialzing 
 pygame.init()
@@ -17,22 +17,13 @@ font = pygame.font.SysFont(preset.FONT, 60)
 DISPLAYSURF = pygame.display.set_mode((preset.SCREEN_WIDTH, preset.SCREEN_WIDTH))
 
 #Creating Sprites Groups
+rps = RPS()
+rps.create(30)
 all_sprites = pygame.sprite.Group()
-rock_sprites = pygame.sprite.Group()
-paper_sprites = pygame.sprite.Group()
-scissors_sprites = pygame.sprite.Group()
-for i in range(30):
-    rock_piece = Piece(Symbol.ROCK)
-    paper_piece = Piece(Symbol.PAPER)
-    scissors_piece = Piece(Symbol.SCISSORS)
-    all_sprites.add(rock_piece, paper_piece, scissors_piece)
-    rock_sprites.add(rock_piece)
-    paper_sprites.add(paper_piece)
-    scissors_sprites.add(scissors_piece)
+all_sprites.add(rps.all_sprites)
  
 #Game Loop
 while True:
-    
     DISPLAYSURF.fill(preset.color.WHITE)
     #Cycles through all events occurring  
     for event in pygame.event.get():
@@ -41,27 +32,17 @@ while True:
             sys.exit()
 
     #Moves and Re-draws all Sprites
-    for piece in all_sprites:
-        DISPLAYSURF.blit(piece.image, piece.rect)
-        piece.move()
+    for sprite in all_sprites:
+        DISPLAYSURF.blit(sprite.image, sprite.rect)
+        sprite.move()
     
-    rock_on_paper = pygame.sprite.groupcollide(rock_sprites, paper_sprites, True, False)
-    paper_on_scissors = pygame.sprite.groupcollide(paper_sprites, scissors_sprites, True, False)
-    scissors_on_rock = pygame.sprite.groupcollide(scissors_sprites, rock_sprites, True, False)
+    rock_on_paper = rps.Rock.collide(True)
+    paper_on_scissors = rps.Paper.collide(True)
+    scissors_on_rock = rps.Scissors.collide(True)
 
-    for piece in rock_on_paper.keys():
-        piece = Piece(Symbol.PAPER, piece.rect.center)
-        paper_sprites.add(piece)
-        all_sprites.add(piece)
-    
-    for piece in paper_on_scissors.keys():
-        piece = Piece(Symbol.SCISSORS, piece.rect.center)
-        scissors_sprites.add(piece)
-        all_sprites.add(piece)
-
-    for piece in scissors_on_rock.keys():
-        piece = Piece(Symbol.ROCK, piece.rect.center)
-        rock_sprites.add(piece)
+    for sprite in (rock_on_paper | paper_on_scissors | scissors_on_rock).keys():
+        symbol = sprite.symbol
+        piece = rps.wins(symbol).create(center=sprite.rect.center)
         all_sprites.add(piece)
          
     pygame.display.update()
