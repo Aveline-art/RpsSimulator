@@ -1,6 +1,7 @@
 from pieces import *
 import pygame
 from pygame.sprite import Sprite
+from pieces import Symbol
 
 class RPS():
     def __init__(self) -> None:
@@ -20,13 +21,13 @@ class RPS():
         self.Paper.create(num)
         self.Scissors.create(num)
     
-    def wins(self, symbol: Symbol):
+    def get_group_by_symbol(self, symbol: Symbol):
         if symbol == Symbol.ROCK:
-            return self.Paper
-        elif symbol == Symbol.PAPER:
-            return self.Scissors
-        else:
             return self.Rock
+        elif symbol == Symbol.PAPER:
+            return self.Paper
+        else:
+            return self.Scissors
 
 class Piece_Organizer():
     def __init__(self, piece_class: Piece) -> None:

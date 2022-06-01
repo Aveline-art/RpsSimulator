@@ -42,7 +42,7 @@ while True:
 
     for sprite in (rock_on_paper | paper_on_scissors | scissors_on_rock).keys():
         symbol = sprite.symbol
-        piece = rps.wins(symbol).create(center=sprite.rect.center)
+        piece = rps.get_group_by_symbol(sprite.symbol.wins()).create(center=sprite.rect.center)
         all_sprites.add(piece)
          
     pygame.display.update()

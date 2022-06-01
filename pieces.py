@@ -3,6 +3,7 @@ import random
 from typing import Optional, Tuple
 from enum import Enum, unique
 import preset
+from symbol import *
 
 pygame.init()
 
