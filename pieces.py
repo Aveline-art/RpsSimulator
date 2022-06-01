@@ -1,19 +1,10 @@
 import pygame
 import random
 from typing import Optional, Tuple
-from enum import Enum, unique
 import preset
-from symbol import *
+from symbols import Symbol, Rock_Symbol, Paper_Symbol, Scissors_Symbol
 
 pygame.init()
-
-font = pygame.font.SysFont("Verdana", 12)
-
-@unique
-class Symbol(Enum):
-    ROCK = "RO"
-    PAPER = "PA"
-    SCISSORS = "SC"
 
 
 class Piece(pygame.sprite.Sprite):
@@ -28,28 +19,33 @@ class Piece(pygame.sprite.Sprite):
         8: (-5, 5),
     }
 
-    def __init__(self, symbol: Symbol, center: Optional[Tuple[int, int]] = None) -> None:
-        super().__init__() 
+    def __init__(self,
+                 image_path: str,
+                 symbol: Symbol,
+                 center: Optional[Tuple[int, int]] = None
+                 ) -> None:
+        super().__init__()
         self.symbol = symbol
-        self.image = font.render(symbol.value, True, preset.color.BLACK)
+        self.image = pygame.image.load(image_path)
         self.rect = self.image.get_rect()
-        self.rect.center = center or (random.randint(0, preset.SCREEN_WIDTH), random.randint(0, preset.SCREEN_HEIGHT))
+        self.rect.center = center or (random.randint(
+            0, preset.SCREEN_WIDTH), random.randint(0, preset.SCREEN_HEIGHT))
 
     def move(self):
         val = random.randint(1, 8)
         self.rect.move_ip(self.direction[val])
 
+
 class Rock_Piece(Piece):
     def __init__(self, center: Optional[Tuple[int, int]] = None) -> None:
-        super().__init__(Symbol.ROCK, center)
-        self.image = pygame.image.load('assets/rock.png')
+        super().__init__(Rock_Symbol(), 'assets/rock.png', center)
+
 
 class Paper_Piece(Piece):
     def __init__(self, center: Optional[Tuple[int, int]] = None) -> None:
-        super().__init__(Symbol.PAPER, center)
-        self.image = pygame.image.load('assets/paper.png')
+        super().__init__(Paper_Symbol(), 'assets/paper.png', center)
+
 
 class Scissors_Piece(Piece):
     def __init__(self, center: Optional[Tuple[int, int]] = None) -> None:
-        super().__init__(Symbol.SCISSORS, center)
-        self.image = pygame.image.load('assets/scissors.png')
+        super().__init__(Scissors_Symbol(), 'assets/paper.png', center)

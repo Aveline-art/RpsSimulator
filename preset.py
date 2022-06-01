@@ -5,8 +5,8 @@ SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
 FONT = "Verdana"
 
+
 @dataclass
 class color:
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
-
