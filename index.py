@@ -1,7 +1,7 @@
 #Imports
 import pygame, sys
 from pygame.locals import *
-from pieces import Rock_Piece, Paper_Piece, Scissor_Piece
+from pieces import Piece, Symbol
 import preset
 
 #Initialzing 
@@ -9,16 +9,12 @@ pygame.init()
 
 #Setting up FPS 
 FramePerSec = pygame.time.Clock()
- 
+
 #Setting up Fonts
 font = pygame.font.SysFont(preset.FONT, 60)
-font_small = pygame.font.SysFont(preset.FONT, 20)
-game_over = font.render("Game Over", True, preset.color.BLACK)
  
 #Create a white screen 
 DISPLAYSURF = pygame.display.set_mode((preset.SCREEN_WIDTH, preset.SCREEN_WIDTH))
-DISPLAYSURF.fill(Color.WHITE.value)
-pygame.display.set_caption("Game")
 
 #Creating Sprites Groups
 all_sprites = pygame.sprite.Group()
@@ -26,9 +22,9 @@ rock_sprites = pygame.sprite.Group()
 paper_sprites = pygame.sprite.Group()
 scissors_sprites = pygame.sprite.Group()
 for i in range(30):
-    rock_piece = Rock_Piece()
-    paper_piece = Paper_Piece()
-    scissors_piece = Scissor_Piece()
+    rock_piece = Piece(Symbol.ROCK)
+    paper_piece = Piece(Symbol.PAPER)
+    scissors_piece = Piece(Symbol.SCISSORS)
     all_sprites.add(rock_piece, paper_piece, scissors_piece)
     rock_sprites.add(rock_piece)
     paper_sprites.add(paper_piece)
@@ -36,6 +32,8 @@ for i in range(30):
  
 #Game Loop
 while True:
+    
+    DISPLAYSURF.fill(preset.color.WHITE)
     #Cycles through all events occurring  
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -43,9 +41,28 @@ while True:
             sys.exit()
 
     #Moves and Re-draws all Sprites
-    for entity in all_sprites:
-        DISPLAYSURF.blit(entity.image, entity.rect)
-        entity.move()
+    for piece in all_sprites:
+        DISPLAYSURF.blit(piece.image, piece.rect)
+        piece.move()
+    
+    rock_on_paper = pygame.sprite.groupcollide(rock_sprites, paper_sprites, True, False)
+    paper_on_scissors = pygame.sprite.groupcollide(paper_sprites, scissors_sprites, True, False)
+    scissors_on_rock = pygame.sprite.groupcollide(scissors_sprites, rock_sprites, True, False)
+
+    for piece in rock_on_paper.keys():
+        piece = Piece(Symbol.PAPER, piece.rect.center)
+        paper_sprites.add(piece)
+        all_sprites.add(piece)
+    
+    for piece in paper_on_scissors.keys():
+        piece = Piece(Symbol.SCISSORS, piece.rect.center)
+        scissors_sprites.add(piece)
+        all_sprites.add(piece)
+
+    for piece in scissors_on_rock.keys():
+        piece = Piece(Symbol.ROCK, piece.rect.center)
+        rock_sprites.add(piece)
+        all_sprites.add(piece)
          
     pygame.display.update()
     FramePerSec.tick(preset.FPS)
