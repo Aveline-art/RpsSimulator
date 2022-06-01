@@ -24,7 +24,7 @@ class TestHands(unittest.TestCase):
         self.assertEqual(hand.loses_to(), 'SC',
                          f"{hand.name} should lost against 'SC'")
 
-    def test_scissor_hand(self):
+    def test_scissors_hand(self):
         hand = Scissors_Hand
         self.assertEqual(hand.wins_against(), 'PA',
                          f"{hand.name} Symbol should win against 'PA'")

@@ -2,9 +2,6 @@ import pygame
 import random
 from typing import Optional, Tuple
 import preset
-from hands import Hand, Rock_Hand, Paper_Hand, Scissors_Hand
-
-pygame.init()
 
 
 class Piece(pygame.sprite.Sprite):
@@ -19,10 +16,9 @@ class Piece(pygame.sprite.Sprite):
         8: (-5, 5),
     }
 
-    def __init__(self, hand: Hand, image_path: str,
+    def __init__(self, image_path: str,
                  center: Optional[Tuple[int, int]] = None) -> None:
         super().__init__()
-        self.hand = hand
         self.image = pygame.image.load(image_path)
         self.rect = self.image.get_rect()
         self.rect.center = center or (random.randint(
@@ -38,15 +34,48 @@ class Piece(pygame.sprite.Sprite):
 
 
 class Rock_Piece(Piece):
+    name = 'Rock'
+    symbol = "RO"
+
     def __init__(self, center: Optional[Tuple[int, int]] = None) -> None:
-        super().__init__(Rock_Hand, 'assets/rock.png', center)
+        super().__init__('assets/rock.png', center)
+
+    @staticmethod
+    def wins_against():
+        return Scissors_Piece
+
+    @staticmethod
+    def loses_to():
+        return Paper_Piece
 
 
 class Paper_Piece(Piece):
+    name = 'Paper'
+    symbol = "PA"
+
     def __init__(self, center: Optional[Tuple[int, int]] = None) -> None:
-        super().__init__(Paper_Hand, 'assets/paper.png', center)
+        super().__init__('assets/paper.png', center)
+
+    @staticmethod
+    def wins_against():
+        return Rock_Piece
+
+    @staticmethod
+    def loses_to():
+        return Scissors_Piece
 
 
 class Scissors_Piece(Piece):
+    name = 'Scissors'
+    symbol = "SC"
+
     def __init__(self, center: Optional[Tuple[int, int]] = None) -> None:
-        super().__init__(Scissors_Hand, 'assets/paper.png', center)
+        super().__init__('assets/paper.png', center)
+
+    @staticmethod
+    def wins_against():
+        return Paper_Piece
+
+    @staticmethod
+    def loses_to():
+        return Rock_Piece
