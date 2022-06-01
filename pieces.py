@@ -13,12 +13,12 @@ class Symbol(Enum):
     ROCK = "RO"
     PAPER = "PA"
     SCISSORS = "SC"
-'''
+
 piece_image = {
     'RO': pygame.image.load('assets/rock.png'),
     'PA': pygame.image.load('assets/paper.png'),
     'SC': pygame.image.load('assets/scissors.png'),
-}'''
+}
 
 
 class Piece(pygame.sprite.Sprite):
@@ -36,7 +36,7 @@ class Piece(pygame.sprite.Sprite):
     def __init__(self, symbol: Symbol, center: Optional[Tuple[int, int]] = None) -> None:
         super().__init__() 
         self._symbol = symbol
-        self.image = font.render(symbol.value, True, preset.color.BLACK)
+        self.image = piece_image[symbol.value]
         self.rect = self.image.get_rect()
         self.rect.center = center or (random.randint(0, preset.SCREEN_WIDTH), random.randint(0, preset.SCREEN_HEIGHT))
     
