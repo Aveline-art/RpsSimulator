@@ -1,4 +1,4 @@
-class Symbol():
+class Hand():
     ROCK = "RO"
     PAPER = "PA"
     SCISSORS = "SC"
@@ -27,9 +27,9 @@ class Symbol():
         return new_symbol
 
 
-Rock_Symbol = Symbol.create_symbol(
-    Symbol.ROCK, 'Rock', Symbol.SCISSORS, Symbol.PAPER)
-Paper_Symbol = Symbol.create_symbol(
-    Symbol.PAPER, 'Paper', Symbol.ROCK, Symbol.SCISSORS)
-Scissors_Symbol = Symbol.create_symbol(
-    Symbol.SCISSORS, 'Scissors', Symbol.PAPER, Symbol.ROCK)
+Rock_Hand = Hand.create_symbol(
+    Hand.ROCK, 'Rock', Hand.SCISSORS, Hand.PAPER)
+Paper_Hand = Hand.create_symbol(
+    Hand.PAPER, 'Paper', Hand.ROCK, Hand.SCISSORS)
+Scissors_Hand = Hand.create_symbol(
+    Hand.SCISSORS, 'Scissors', Hand.PAPER, Hand.ROCK)
