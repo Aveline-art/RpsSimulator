@@ -9,15 +9,15 @@ class Piece(pygame.sprite.Sprite):
     name: str
     symbol: str
     directions = {
-        1: (0, 5),
-        2: (5, 5),
-        3: (5, 0),
-        4: (5, -5),
-        5: (0, -5),
-        6: (-5, -5),
-        7: (-5, 0),
-        8: (-5, 5),
-        9: (0, 0),
+        'N': (0, 5),
+        'NE': (5, 5),
+        'E': (5, 0),
+        'SE': (5, -5),
+        'S': (0, -5),
+        'SW': (-5, -5),
+        'W': (-5, 0),
+        'NW': (-5, 5),
+        'C': (0, 0),
     }
 
     def __init__(self, image_path: str,
@@ -30,14 +30,18 @@ class Piece(pygame.sprite.Sprite):
 
     def move(self, direction: Optional[Direction] = None) -> None:
         if direction:
-            pass
+            self.rect.move_ip(direction)
         else:
-            val = random.randint(1, 9)
-            self.rect.move_ip(self.directions[val])
+            direction = self._move() or random.choice(
+                list(self.directions.values()))
+            self.rect.move_ip(direction)
 
     @classmethod
     def create(cls, center: Optional[Location] = None) -> 'Piece':
         return cls(center)
+
+    def _move(self) -> None:
+        return None
 
 
 class Rock_Piece(Piece):

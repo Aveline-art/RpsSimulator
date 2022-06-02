@@ -47,9 +47,9 @@ class RPS():
 
     def prototype_move(self, func: Callable[[Any], Direction]) -> None:
         wrapped = self._move_wrapper(func)
-        self.rock.piece.move = wrapped
-        self.paper.piece.move = wrapped
-        self.scissors.piece.move = wrapped
+        self.rock.piece._move = wrapped
+        self.paper.piece._move = wrapped
+        self.scissors.piece._move = wrapped
 
     def _move_wrapper(self, func):
         def new_func(self, *args, **kwargs):

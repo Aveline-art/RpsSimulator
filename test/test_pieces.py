@@ -14,7 +14,7 @@ class TestPieces(unittest.TestCase):
 
     @patch('pieces.random')
     def test_rock_piece(self, random):
-        random.randint._mock_side_effect = self.random.randint
+        random.choice._mock_side_effect = self.random.choice
         self.assertEqual(Rock_Piece.name, "Rock",
                          f"{Rock_Piece.name} Piece's name should be Rock.")
         self.assertEqual(Rock_Piece.symbol, "RO",
@@ -31,7 +31,7 @@ class TestPieces(unittest.TestCase):
 
     @patch('pieces.random')
     def test_paper_piece(self, random):
-        random.randint._mock_side_effect = self.random.randint
+        random.choice._mock_side_effect = self.random.choice
         self.assertEqual(Paper_Piece.name, "Paper",
                          f"{Paper_Piece.name} Piece's name should be Paper.")
         self.assertEqual(Paper_Piece.symbol, "PA",
@@ -48,7 +48,7 @@ class TestPieces(unittest.TestCase):
 
     @patch('pieces.random')
     def test_scissor_piece(self, random):
-        random.randint._mock_side_effect = self.random.randint
+        random.choice._mock_side_effect = self.random.choice
         self.assertEqual(Scissors_Piece.name, "Scissors",
                          f"{Scissors_Piece.name} Piece's name should be \
                          Scissors.")
