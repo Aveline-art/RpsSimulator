@@ -14,6 +14,7 @@ class TestRps(unittest.TestCase):
         self.assertRaises(ValueError, rps.create, num=0)
         self.assertRaises(ValueError, rps.create, num=-1)
         self.assertRaises(ValueError, rps.create, num=-1000)
+        self.assertRaises(TypeError, rps.create, num='should return error')
 
         self.assertIsInstance(rps.rock.collide(), dict,
                               "Collide should return a dictionary.")

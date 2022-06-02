@@ -1,7 +1,7 @@
-from msilib.schema import Error
-from typing import Optional, Tuple
+from typing import Optional
 import pygame
 from pieces import Piece, Rock_Piece, Paper_Piece, Scissors_Piece
+from rpstypes import Location
 
 
 class Hand():
@@ -13,11 +13,13 @@ class Hand():
         raise NotImplementedError
 
     def create(self,
-               center: Optional[Tuple[int, int]] = None,
+               center: Optional[Location] = None,
                num: int = 1
                ) -> list[Piece]:
         if num < 1:
             raise ValueError('num cannot be less than 1')
+        elif not isinstance(num, int):
+            raise TypeError('num must be an int')
         pieces = []
         for i in range(num):
             piece = self.piece.create(center)

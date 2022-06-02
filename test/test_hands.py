@@ -25,6 +25,8 @@ class TestHands(unittest.TestCase):
         self.assertRaises(ValueError, rock.create, num=0)
         self.assertRaises(ValueError, rock.create, num=-1)
         self.assertRaises(ValueError, rock.create, num=-1000)
+        self.assertRaises(TypeError, rock.create, num='should return error')
+
         rock.create(num=29)
         self.assertGreater(len(rock.group), 29,
                            "There should be more than 29 sprites in rock group \

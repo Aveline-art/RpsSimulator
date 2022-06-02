@@ -1,7 +1,8 @@
-from typing import Optional, Tuple
+from typing import Optional
 import pygame
 from hands import Rock, Paper, Scissors
 from pieces import Piece
+from rpstypes import Location
 
 
 class RPS():
@@ -28,13 +29,15 @@ class RPS():
     def create(self, num: int = 1) -> None:
         if num < 1:
             raise ValueError('num cannot be less than 1')
+        elif not isinstance(num, int):
+            raise TypeError('num must be an int')
         self.rock.group.add(self.rock.create(num=num))
         self.paper.group.add(self.paper.create(num=num))
         self.scissors.group.add(self.scissors.create(num=num))
 
     def create_loses_to(self,
                         sprite: Piece,
-                        center: Optional[Tuple[int, int]] = None) -> Piece:
+                        center: Optional[Location] = None) -> Piece:
         if sprite.symbol == self.rock.piece.symbol:
             return self.paper.create(center)
         elif sprite.symbol == self.paper.piece.symbol:
