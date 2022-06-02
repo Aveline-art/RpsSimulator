@@ -6,7 +6,7 @@ class Hand():
     def __init__(self) -> None:
         self.group = pygame.sprite.Group()
 
-    def collide(self):
+    def collide(self, kill: bool = False) -> dict:
         raise NotImplementedError
 
     def create(self) -> Piece:

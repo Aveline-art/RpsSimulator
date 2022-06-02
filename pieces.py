@@ -24,12 +24,12 @@ class Piece(pygame.sprite.Sprite):
         self.rect.center = center or (random.randint(
             0, preset.SCREEN_WIDTH), random.randint(0, preset.SCREEN_HEIGHT))
 
-    def move(self):
+    def move(self) -> None:
         val = random.randint(1, 8)
         self.rect.move_ip(self.direction[val])
 
     @classmethod
-    def create(cls, center: Optional[Tuple[int, int]] = None):
+    def create(cls, center: Optional[Tuple[int, int]] = None) -> 'Piece':
         return cls(center)
 
 
@@ -41,11 +41,11 @@ class Rock_Piece(Piece):
         super().__init__('assets/rock.png', center)
 
     @staticmethod
-    def wins_against():
+    def wins_against() -> 'Scissors_Piece':
         return Scissors_Piece
 
     @staticmethod
-    def loses_to():
+    def loses_to() -> 'Paper_Piece':
         return Paper_Piece
 
 
@@ -57,11 +57,11 @@ class Paper_Piece(Piece):
         super().__init__('assets/paper.png', center)
 
     @staticmethod
-    def wins_against():
+    def wins_against() -> Rock_Piece:
         return Rock_Piece
 
     @staticmethod
-    def loses_to():
+    def loses_to() -> 'Scissors_Piece':
         return Scissors_Piece
 
 
@@ -73,9 +73,9 @@ class Scissors_Piece(Piece):
         super().__init__('assets/paper.png', center)
 
     @staticmethod
-    def wins_against():
+    def wins_against() -> Paper_Piece:
         return Paper_Piece
 
     @staticmethod
-    def loses_to():
+    def loses_to() -> Rock_Piece:
         return Rock_Piece
