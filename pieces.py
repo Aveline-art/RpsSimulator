@@ -6,7 +6,9 @@ from rpstypes import Location, Direction
 
 
 class Piece(pygame.sprite.Sprite):
-    directions: dict[int, Direction] = {
+    name: str
+    symbol: str
+    directions = {
         1: (0, 5),
         2: (5, 5),
         3: (5, 0),

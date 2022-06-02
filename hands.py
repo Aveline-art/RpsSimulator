@@ -5,6 +5,8 @@ from rpstypes import Location
 
 
 class Hand():
+    piece: Piece
+
     def __init__(self) -> None:
         self.group = pygame.sprite.Group()
 
