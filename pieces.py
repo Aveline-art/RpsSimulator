@@ -70,7 +70,7 @@ class Scissors_Piece(Piece):
     symbol = "SC"
 
     def __init__(self, center: Optional[Tuple[int, int]] = None) -> None:
-        super().__init__('assets/paper.png', center)
+        super().__init__('assets/scissors.png', center)
 
     @staticmethod
     def wins_against() -> Paper_Piece:

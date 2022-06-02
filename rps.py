@@ -1,5 +1,7 @@
+from typing import Optional, Tuple
 import pygame
 from hands import Rock, Paper, Scissors
+from pieces import Piece
 
 
 class RPS():
@@ -28,3 +30,13 @@ class RPS():
             self.rock.group.add(self.rock.create())
             self.paper.group.add(self.paper.create())
             self.scissors.group.add(self.scissors.create())
+
+    def create_loses_to(self,
+                        sprite: Piece,
+                        center: Optional[Tuple[int, int]] = None) -> Piece:
+        if sprite.symbol == self.rock.piece.symbol:
+            return self.paper.create(center)
+        elif sprite.symbol == self.paper.piece.symbol:
+            return self.scissors.create(center)
+        else:
+            return self.rock.create(center)
