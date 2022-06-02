@@ -15,7 +15,7 @@ class Hand():
     def create(self,
                center: Optional[Tuple[int, int]] = None,
                num: int = 1
-               ) -> Piece:
+               ) -> list[Piece]:
         if num < 1:
             raise ValueError('num cannot be less than 1')
         pieces = []
@@ -23,7 +23,7 @@ class Hand():
             piece = self.piece.create(center)
             self.group.add(piece)
             pieces.append(piece)
-        return piece if num == 1 else pieces
+        return pieces
 
 
 class Rock(Hand):

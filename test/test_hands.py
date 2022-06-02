@@ -18,9 +18,17 @@ class TestHands(unittest.TestCase):
         rock = Rock()
         self.assertRaises(NotImplementedError, rock.collide)
 
-        rock_piece = rock.create()
+        [rock_piece] = rock.create()
         self.assertIsInstance(rock_piece, Rock_Piece,
                               "Rock create did not create Rock Piece")
+
+        self.assertRaises(ValueError, rock.create, num=0)
+        self.assertRaises(ValueError, rock.create, num=-1)
+        self.assertRaises(ValueError, rock.create, num=-1000)
+        rock.create(num=29)
+        self.assertGreater(len(rock.group), 29,
+                           "There should be more than 29 sprites in rock group \
+                           since 1 was added previously")
 
     def test_paper(self):
         self.assertIsInstance(Paper.piece(), Paper_Piece,
@@ -29,7 +37,7 @@ class TestHands(unittest.TestCase):
         paper = Paper()
         self.assertRaises(NotImplementedError, paper.collide)
 
-        paper_piece = paper.create()
+        [paper_piece] = paper.create()
         self.assertIsInstance(paper_piece, Paper_Piece,
                               "Paper create did not create Paper Piece")
 
@@ -40,7 +48,7 @@ class TestHands(unittest.TestCase):
         scissors = Scissors()
         self.assertRaises(NotImplementedError, scissors.collide)
 
-        scissors_piece = scissors.create()
+        [scissors_piece] = scissors.create()
         self.assertIsInstance(scissors_piece, Scissors_Piece,
                               "Scissors create did not create Scissors Piece")
 

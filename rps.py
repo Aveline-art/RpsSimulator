@@ -28,10 +28,9 @@ class RPS():
     def create(self, num: int = 1) -> None:
         if num < 1:
             raise ValueError('num cannot be less than 1')
-        for i in range(num):
-            self.rock.group.add(self.rock.create())
-            self.paper.group.add(self.paper.create())
-            self.scissors.group.add(self.scissors.create())
+        self.rock.group.add(self.rock.create(num=num))
+        self.paper.group.add(self.paper.create(num=num))
+        self.scissors.group.add(self.scissors.create(num=num))
 
     def create_loses_to(self,
                         sprite: Piece,
