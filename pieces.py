@@ -24,7 +24,7 @@ class Piece(pygame.sprite.Sprite):
         self.rect.center = center or (random.randint(
             0, preset.SCREEN_WIDTH), random.randint(0, preset.SCREEN_HEIGHT))
 
-    def move(self) -> None:
+    def move(self, direction: Optional[Tuple[int, int]] = None) -> None:
         val = random.randint(1, 8)
         self.rect.move_ip(self.direction[val])
 
