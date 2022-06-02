@@ -1,8 +1,8 @@
-from typing import Optional
+from typing import Any, Callable, Optional
 import pygame
 from hands import Rock, Paper, Scissors
 from pieces import Piece
-from rpstypes import Location
+from rpstypes import Direction, Location
 
 
 class RPS():
@@ -44,3 +44,16 @@ class RPS():
             return self.scissors.create(center)
         else:
             return self.rock.create(center)
+
+    def prototype_move(self, func: Callable[[Any], Direction]) -> None:
+        wrapped = self._move_wrapper(func)
+        self.rock.piece.move = wrapped
+        self.paper.piece.move = wrapped
+        self.scissors.piece.move = wrapped
+
+    def _move_wrapper(self, func):
+        def new_func(self, *args, **kwargs):
+            # TODO insert some useful self variables (maybe as keywords)
+            # as arguments into func
+            func(*args, **kwargs)
+        return new_func
