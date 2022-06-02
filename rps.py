@@ -1,4 +1,5 @@
-from hands import Rock, Paper, Scissors
+import pygame
+from hands import Hand, Rock, Paper, Scissors
 
 
 class RPS():
@@ -7,9 +8,15 @@ class RPS():
         self.rock = Rock()
         self.paper = Paper()
         self.scissors = Scissors()
-        self.rock.add_opposing_group(self.paper)
-        self.paper.add_opposing_group(self.scissors)
-        self.scissors.add_opposing_group(self.rock)
+
+        def create_collide(opposing_hand: Hand):
+            lambda kill=False: \
+                pygame.sprite.groupcollide(
+                    self.group, opposing_hand.group, kill, False)
+
+        self.rock.collide = create_collide(self.paper)
+        self.paper.collide = create_collide(self.scissors)
+        self.scissors.collide = create_collide(self.rock)
 
     @property
     def all_sprites(self):

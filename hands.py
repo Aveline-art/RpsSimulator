@@ -9,15 +9,8 @@ class Hand():
     def collide(self):
         raise NotImplementedError
 
-    def add_opposing_group(self, hand):
-        self._generate_collide(hand.group)
 
-    def _generate_collide(self, opposing_group):
-        self.collide = lambda kill=False: \
-            pygame.sprite.groupcollide(self.group, opposing_group, kill, False)
-
-
-class Rock():
+class Rock(Hand):
     piece = Rock_Piece
     create = Rock_Piece.create
 
@@ -25,7 +18,7 @@ class Rock():
         pass
 
 
-class Paper():
+class Paper(Hand):
     piece = Paper_Piece
     create = Paper_Piece.create
 
@@ -33,7 +26,7 @@ class Paper():
         pass
 
 
-class Scissors():
+class Scissors(Hand):
     piece = Scissors_Piece
     create = Scissors_Piece.create
 

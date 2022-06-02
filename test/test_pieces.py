@@ -1,35 +1,68 @@
 import unittest
-from handscopy import Hand, Rock_Hand, Paper_Hand, Scissors_Hand
+from random import Random
+from unittest.mock import patch
+from pieces import Rock_Piece, Paper_Piece, Scissors_Piece
 
 
-class TestHands(unittest.TestCase):
+class TestPieces(unittest.TestCase):
 
-    def test_hand(self):
-        self.assertEqual(Hand.ROCK, 'RO', "Rock Symbol should be 'RO'")
-        self.assertEqual(Hand.PAPER, 'PA', "Paper Symbol should be 'PA'")
-        self.assertEqual(Hand.SCISSORS, 'SC',
-                         "Scissor Symbol should be 'SC'")
+    def setUp(self):
+        self.random = Random(10)
 
-    def test_rock_hand(self):
-        hand = Rock_Hand
-        self.assertEqual(hand.wins_against(), 'SC',
-                         f"{hand.name} Symbol should win against 'SC'")
-        self.assertEqual(hand.loses_to(), 'PA',
-                         f"{hand.name} should lost against 'PA'")
+    def test_piece(self):
+        pass
 
-    def test_paper_hand(self):
-        hand = Paper_Hand
-        self.assertEqual(hand.wins_against(), 'RO',
-                         f"{hand.name} Symbol should win against 'RO'")
-        self.assertEqual(hand.loses_to(), 'SC',
-                         f"{hand.name} should lost against 'SC'")
+    @patch('pieces.random')
+    def test_rock_piece(self, random):
+        random.randint._mock_side_effect = self.random.randint
+        self.assertEqual(Rock_Piece.name, "Rock",
+                         f"{Rock_Piece.name} Piece's name should be Rock.")
+        self.assertEqual(Rock_Piece.symbol, "RO",
+                         f"{Rock_Piece.name} Piece's symbol should be RO.")
+        self.assertRaises(TypeError, Rock_Piece.move)
 
-    def test_scissors_hand(self):
-        hand = Scissors_Hand
-        self.assertEqual(hand.wins_against(), 'PA',
-                         f"{hand.name} Symbol should win against 'PA'")
-        self.assertEqual(hand.loses_to(), 'RO',
-                         f"{hand.name} should lost against 'RO'")
+        rock = Rock_Piece.create((200, 200))
+        self.assertEqual(rock.rect.center, (200, 200),
+                         "Rock piece was not correctly created.")
+
+        rock.move()
+        self.assertEqual(rock.rect.center, (200, 205),
+                         "Rock piece did not move to correct position.")
+
+    @patch('pieces.random')
+    def test_paper_piece(self, random):
+        random.randint._mock_side_effect = self.random.randint
+        self.assertEqual(Paper_Piece.name, "Paper",
+                         f"{Paper_Piece.name} Piece's name should be Paper.")
+        self.assertEqual(Paper_Piece.symbol, "PA",
+                         f"{Paper_Piece.name} Piece's symbol should be PA.")
+        self.assertRaises(TypeError, Paper_Piece.move)
+
+        paper = Paper_Piece.create((200, 200))
+        self.assertEqual(paper.rect.center, (200, 200),
+                         "Paper piece was not correctly created.")
+
+        paper.move()
+        self.assertEqual(paper.rect.center, (200, 205),
+                         "Paper piece did not move to correct position.")
+
+    @patch('pieces.random')
+    def test_scissor_piece(self, random):
+        random.randint._mock_side_effect = self.random.randint
+        self.assertEqual(Scissors_Piece.name, "Scissors",
+                         f"{Scissors_Piece.name} Piece's name should be \
+                         Scissors.")
+        self.assertEqual(Scissors_Piece.symbol, "SC",
+                         f"{Scissors_Piece.name} Piece's symbol should be SC.")
+        self.assertRaises(TypeError, Scissors_Piece.move)
+
+        scissors = Scissors_Piece.create((200, 200))
+        self.assertEqual(scissors.rect.center, (200, 200),
+                         "Scissors piece was not correctly created.")
+
+        scissors.move()
+        self.assertEqual(scissors.rect.center, (200, 205),
+                         "Scissors piece did not move to correct position.")
 
 
 if __name__ == '__main__':
