@@ -1,5 +1,5 @@
 import pygame
-from pieces import Rock_Piece, Paper_Piece, Scissors_Piece
+from pieces import Piece, Rock_Piece, Paper_Piece, Scissors_Piece
 
 
 class Hand():
@@ -9,26 +9,28 @@ class Hand():
     def collide(self):
         raise NotImplementedError
 
+    def create(self) -> Piece:
+        piece = self.piece.create()
+        self.group.add(piece)
+        return piece
+
 
 class Rock(Hand):
     piece = Rock_Piece
-    create = Rock_Piece.create
 
     def __init__(self) -> None:
-        pass
+        super().__init__()
 
 
 class Paper(Hand):
     piece = Paper_Piece
-    create = Paper_Piece.create
 
     def __init__(self) -> None:
-        pass
+        super().__init__()
 
 
 class Scissors(Hand):
     piece = Scissors_Piece
-    create = Scissors_Piece.create
 
     def __init__(self) -> None:
-        pass
+        super().__init__()

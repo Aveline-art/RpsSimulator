@@ -15,34 +15,34 @@ class TestHands(unittest.TestCase):
         self.assertIsInstance(Rock.piece(), Rock_Piece,
                               "Rock piece is not Rock Piece")
 
-        rock_piece = Rock.create()
-        self.assertIsInstance(rock_piece, Rock_Piece,
-                              "Rock create did not create Rock Piece")
-
         rock = Rock()
         self.assertRaises(NotImplementedError, rock.collide)
+
+        rock_piece = rock.create()
+        self.assertIsInstance(rock_piece, Rock_Piece,
+                              "Rock create did not create Rock Piece")
 
     def test_paper(self):
         self.assertIsInstance(Paper.piece(), Paper_Piece,
                               "Paper piece is not Paper Piece")
 
-        paper_piece = Paper.create()
-        self.assertIsInstance(paper_piece, Paper_Piece,
-                              "Paper create did not create Paper Piece")
-
         paper = Paper()
         self.assertRaises(NotImplementedError, paper.collide)
+
+        paper_piece = paper.create()
+        self.assertIsInstance(paper_piece, Paper_Piece,
+                              "Paper create did not create Paper Piece")
 
     def test_scissors(self):
         self.assertIsInstance(Scissors.piece(), Scissors_Piece,
                               "Scissors piece is not Scissors Piece")
 
-        scissors_piece = Scissors.create()
+        scissors = Scissors()
+        self.assertRaises(NotImplementedError, scissors.collide)
+
+        scissors_piece = scissors.create()
         self.assertIsInstance(scissors_piece, Scissors_Piece,
                               "Scissors create did not create Scissors Piece")
-
-        scissors = Rock()
-        self.assertRaises(NotImplementedError, scissors.collide)
 
 
 if __name__ == '__main__':

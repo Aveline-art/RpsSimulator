@@ -1,3 +1,4 @@
+from typing import Callable
 import pygame
 from hands import Hand, Rock, Paper, Scissors
 
@@ -9,8 +10,8 @@ class RPS():
         self.paper = Paper()
         self.scissors = Scissors()
 
-        def create_collide(opposing_hand: Hand):
-            lambda kill=False: \
+        def create_collide(opposing_hand: Hand) -> Callable[[bool], dict]:
+            return lambda kill=False: \
                 pygame.sprite.groupcollide(
                     self.group, opposing_hand.group, kill, False)
 
@@ -19,12 +20,12 @@ class RPS():
         self.scissors.collide = create_collide(self.rock)
 
     @property
-    def all_sprites(self):
+    def all_sprites(self) -> list[pygame.sprite.Group]:
         sprites = self.rock.group.sprites() + self.paper.group.sprites() + \
             self.scissors.group.sprites()
         return sprites
 
-    def create(self, num: int = 1):
+    def create(self, num: int = 1) -> None:
         for i in range(num):
             self.rock.group.add(self.rock.create())
             self.paper.group.add(self.paper.create())
