@@ -1,5 +1,5 @@
 import unittest
-from hands import Hand, Rock_Hand, Paper_Hand, Scissors_Hand
+from handscopy import Hand, Rock_Hand, Paper_Hand, Scissors_Hand
 
 
 class TestHands(unittest.TestCase):

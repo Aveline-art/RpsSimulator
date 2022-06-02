@@ -1,16 +1,15 @@
-import pygame
-from pieces import Rock, Paper, Scissors
+from hands import Rock, Paper, Scissors
 
 
 class RPS():
-    rock = Rock
-    paper = Paper
-    scissors = Scissors
 
     def __init__(self) -> None:
-        self.rock.group = pygame.sprite.Group()
-        self.paper.group = pygame.sprite.Group()
-        self.scissors.group = pygame.sprite.Group()
+        self.rock = Rock()
+        self.paper = Paper()
+        self.scissors = Scissors()
+        self.rock.add_opposing_group(self.paper)
+        self.paper.add_opposing_group(self.scissors)
+        self.scissors.add_opposing_group(self.rock)
 
     @property
     def all_sprites(self):
