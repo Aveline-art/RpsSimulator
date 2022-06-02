@@ -26,6 +26,8 @@ class RPS():
         return sprites
 
     def create(self, num: int = 1) -> None:
+        if num < 1:
+            raise ValueError('num cannot be less than 1')
         for i in range(num):
             self.rock.group.add(self.rock.create())
             self.paper.group.add(self.paper.create())

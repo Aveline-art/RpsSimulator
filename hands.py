@@ -1,3 +1,4 @@
+from msilib.schema import Error
 from typing import Optional, Tuple
 import pygame
 from pieces import Piece, Rock_Piece, Paper_Piece, Scissors_Piece
@@ -11,10 +12,18 @@ class Hand():
             dict[pygame.sprite.Group, list[pygame.sprite.Group]]:
         raise NotImplementedError
 
-    def create(self, center: Optional[Tuple[int, int]] = None) -> Piece:
-        piece = self.piece.create(center)
-        self.group.add(piece)
-        return piece
+    def create(self,
+               center: Optional[Tuple[int, int]] = None,
+               num: int = 1
+               ) -> Piece:
+        if num < 1:
+            raise ValueError('num cannot be less than 1')
+        pieces = []
+        for i in range(num):
+            piece = self.piece.create(center)
+            self.group.add(piece)
+            pieces.append(piece)
+        return piece if num == 1 else pieces
 
 
 class Rock(Hand):
