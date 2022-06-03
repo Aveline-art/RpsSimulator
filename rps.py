@@ -6,6 +6,7 @@ from rpstypes import Direction, Location
 
 
 class RPS():
+    directions = Piece.directions
 
     def __init__(self) -> None:
         self.rock = Rock()
@@ -45,6 +46,13 @@ class RPS():
         else:
             return self.rock.create(center)
 
+    def collide(self, kill: bool = False) -> \
+            dict[pygame.sprite.Group, list[pygame.sprite.Group]]:
+        rock_on_paper = self.rock.collide(True)
+        paper_on_scissors = self.paper.collide(True)
+        scissors_on_rock = self.scissors.collide(True)
+        return rock_on_paper | paper_on_scissors | scissors_on_rock
+
     def prototype_move(self, func: Callable[[Any], Direction]) -> None:
         wrapped = self._move_wrapper(func)
         self.rock.piece._move = wrapped
@@ -55,5 +63,5 @@ class RPS():
         def new_func(self, *args, **kwargs):
             # TODO insert some useful self variables (maybe as keywords)
             # as arguments into func
-            func(*args, **kwargs)
+            return func(*args, **kwargs)
         return new_func
