@@ -1,7 +1,7 @@
 import unittest
 import pygame
-from hands import Hand, Rock, Paper, Scissors
-from pieces import Paper_Piece, Rock_Piece, Scissors_Piece
+from rps.hands import Hand, Rock, Paper, Scissors
+from rps.pieces import Paper_Piece, Rock_Piece, Scissors_Piece
 
 
 class TestHands(unittest.TestCase):

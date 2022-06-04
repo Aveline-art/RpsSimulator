@@ -1,6 +1,6 @@
 import unittest
-from pieces import Rock_Piece
-from rps import RPS
+from rps.pieces import Rock_Piece
+from rps.rps import RPS
 
 
 class TestRps(unittest.TestCase):

@@ -1,8 +1,8 @@
 from typing import Any, Callable, Optional
 import pygame
-from hands import Rock, Paper, Scissors
-from pieces import Piece
-from rpstypes import Direction, Location
+from rps.hands import Rock, Paper, Scissors
+from rps.pieces import Piece
+from rps.rpstypes import Direction, Location
 
 
 class RPS():

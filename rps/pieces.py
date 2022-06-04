@@ -1,8 +1,8 @@
 import pygame
 import random
 from typing import Optional
-import preset
-from rpstypes import Location
+import rps.preset as preset
+from rps.rpstypes import Location
 
 
 class Piece(pygame.sprite.Sprite):
@@ -46,7 +46,7 @@ class Rock_Piece(Piece):
     symbol = "RO"
 
     def __init__(self, center: Optional[Location] = None) -> None:
-        super().__init__('assets/rock.png', center)
+        super().__init__('rps/assets/rock.png', center)
 
     @staticmethod
     def wins_against() -> 'Scissors_Piece':
@@ -62,7 +62,7 @@ class Paper_Piece(Piece):
     symbol = "PA"
 
     def __init__(self, center: Optional[Location] = None) -> None:
-        super().__init__('assets/paper.png', center)
+        super().__init__('rps/assets/paper.png', center)
 
     @staticmethod
     def wins_against() -> Rock_Piece:
@@ -78,7 +78,7 @@ class Scissors_Piece(Piece):
     symbol = "SC"
 
     def __init__(self, center: Optional[Location] = None) -> None:
-        super().__init__('assets/scissors.png', center)
+        super().__init__('rps/assets/scissors.png', center)
 
     @staticmethod
     def wins_against() -> Paper_Piece:

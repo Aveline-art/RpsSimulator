@@ -3,9 +3,9 @@ from typing import Optional
 import pygame
 import sys
 from pygame.locals import QUIT
-import preset
-from rps import RPS
-from rpstypes import Direction
+import rps.preset as preset
+from rps.rps import RPS
+from rps.rpstypes import Direction
 
 # Initialzing
 pygame.init()

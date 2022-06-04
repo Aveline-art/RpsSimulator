@@ -1,7 +1,7 @@
 from typing import Optional
 import pygame
-from pieces import Piece, Rock_Piece, Paper_Piece, Scissors_Piece
-from rpstypes import Location
+from rps.pieces import Piece, Rock_Piece, Paper_Piece, Scissors_Piece
+from rps.rpstypes import Location
 
 
 class Hand():

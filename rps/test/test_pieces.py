@@ -1,7 +1,7 @@
 import unittest
 from random import Random
 from unittest.mock import patch
-from pieces import Rock_Piece, Paper_Piece, Scissors_Piece
+from rps.pieces import Rock_Piece, Paper_Piece, Scissors_Piece
 
 
 class TestPieces(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestPieces(unittest.TestCase):
     def test_piece(self):
         pass
 
-    @patch('pieces.random')
+    @patch('rps.pieces.random')
     def test_rock_piece(self, random):
         random.choice._mock_side_effect = self.random.choice
         self.assertEqual(Rock_Piece.name, "Rock",
@@ -29,7 +29,7 @@ class TestPieces(unittest.TestCase):
         self.assertEqual(rock.rect.center, (200, 205),
                          "Rock piece did not move to correct position.")
 
-    @patch('pieces.random')
+    @patch('rps.pieces.random')
     def test_paper_piece(self, random):
         random.choice._mock_side_effect = self.random.choice
         self.assertEqual(Paper_Piece.name, "Paper",
@@ -46,7 +46,7 @@ class TestPieces(unittest.TestCase):
         self.assertEqual(paper.rect.center, (200, 205),
                          "Paper piece did not move to correct position.")
 
-    @patch('pieces.random')
+    @patch('rps.pieces.random')
     def test_scissor_piece(self, random):
         random.choice._mock_side_effect = self.random.choice
         self.assertEqual(Scissors_Piece.name, "Scissors",

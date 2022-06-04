@@ -8,15 +8,27 @@ RpsSimulator is a pygame program that simulates the evolution of a rock-paper-sc
 
 In order to use this, the first step is to create an assets directory. In this directory, add three image files: paper.png, rock.png, and scissors.png. These files are representations of the rock, paper, and scissor type.
 
-Then you must download all dependencies with pip install -r requirements.txt.
+Then you must download all dependencies with:
+
+```bash
+pip install -r requirements.txt.
+```
 
 Optionally, you can create a move function in index.py, following the notes there to create the function. This function represents how the objects would move. By default objects move at random. However, you can program it to follow a certain strategy, such as "Move away from the type that defeats me" or "Move towards the type that I defeat".
 
 ### Example Usage:
 
-To use the simulator, simply run python index.py.
+To use the simulator, simply run:
 
-To run tests, run python -m unittest.
+```bash
+python -m rps.index
+```
+
+To run tests, run
+
+```bash
+python -m unittest.
+```
 
 ### Brief Architecture Summary:
 
