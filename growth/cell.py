@@ -1,8 +1,10 @@
 from typing import Union
 
+CellType = Union[str, int]
+
 
 class Cell():
-    def __init__(self, type: Union[int, str], enemies: list[any]) -> None:
+    def __init__(self, type: CellType, enemies: list[CellType]) -> None:
         self.type = type
         self.enemies = enemies
 
